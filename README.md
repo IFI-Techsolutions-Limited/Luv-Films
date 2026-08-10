@@ -22,6 +22,25 @@ http://serene-headland-22338.herokuapp.com/
 - NodeJS
 - CLI
 
+## GitHub Copilot (developer assistant)
+
+Per the Luv Films HLD, **GitHub Copilot** is an AI coding assistant used during development — it is **not** a runtime feature of the Node app.
+
+### Enable for the team
+1. Assign **GitHub Copilot** seats to developers in the org: [GitHub Copilot settings](https://github.com/settings/copilot)
+2. For org/repo policy: Organization → **Copilot** → enable for `IFI-Techsolutions-Limited/Luv-Films`
+3. In VS Code / Visual Studio / JetBrains, install the **GitHub Copilot** and **GitHub Copilot Chat** extensions and sign in with GitHub
+
+### Repo configuration (already in this project)
+| File | Purpose |
+|------|---------|
+| `.github/copilot-instructions.md` | Project context Copilot uses for suggestions |
+| `.github/CODEOWNERS` | Review ownership (HLD: CODEOWNERS / PR reviews) |
+| `.vscode/extensions.json` | Recommends Copilot extensions in the IDE |
+
+### Typical flow (matches HLD)
+`Developer` → assisted by `GitHub Copilot` → push/PR to `GitHub` → `GitHub Actions` → Azure App Service (Dev/Prod)
+
 ## Installation
 
 ##### Clone the latest Repository

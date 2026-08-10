@@ -1,0 +1,10 @@
+# CODEOWNERS — map paths to GitHub users or teams that must review changes.
+# Replace the placeholders with real @users or @org/team from your GitHub org.
+# Uncomment lines after the team/users exist, or branch protection with
+# "Require review from Code Owners" will fail.
+#
+# Examples:
+# *                         @your-github-username
+# /controllers/             @IFI-Techsolutions-Limited/luv-films-admins
+# /config/                  @IFI-Techsolutions-Limited/luv-films-admins
+# /.github/                 @IFI-Techsolutions-Limited/luv-films-admins
