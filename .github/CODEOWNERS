@@ -1,10 +1,31 @@
-# CODEOWNERS — map paths to GitHub users or teams that must review changes.
-# Replace the placeholders with real @users or @org/team from your GitHub org.
-# Uncomment lines after the team/users exist, or branch protection with
-# "Require review from Code Owners" will fail.
+# CODEOWNERS - map paths to GitHub users or teams that must review changes.
 #
-# Examples:
-# *                         @your-github-username
-# /controllers/             @IFI-Techsolutions-Limited/luv-films-admins
-# /config/                  @IFI-Techsolutions-Limited/luv-films-admins
-# /.github/                 @IFI-Techsolutions-Limited/luv-films-admins
+# STATUS: PLACEHOLDER - no real GitHub usernames or teams have been
+# confirmed for this repository, so ownership below is NOT yet active.
+# Replace every "REPLACE_WITH_..." placeholder with a real @username or
+# @IFI-Techsolutions-Limited/team-name, then remove the leading "#" to
+# uncomment the rule. Until that is done:
+#   - Branch protection's "Require review from Code Owners" cannot be
+#     safely enabled (it would make main unmergeable).
+#   - Reviews are not currently enforced by path.
+#
+# Minimum coverage required by repository governance policy:
+#   *                         -> default owner(s) for everything
+#   .github/workflows/       -> CI/CD pipeline owner(s)
+#   .github/dependabot.yml   -> dependency policy owner(s)
+#   .github/CODEOWNERS       -> this file's own owner(s) (meta-ownership)
+#   package.json             -> dependency/runtime owner(s)
+#   package-lock.json        -> dependency/runtime owner(s)
+#
+# Example syntax once real owners are known:
+#   * @your-github-username
+#   /controllers/ @IFI-Techsolutions-Limited/luv-films-admins
+#   /config/ @IFI-Techsolutions-Limited/luv-films-admins
+#   /.github/ @IFI-Techsolutions-Limited/luv-films-admins
+
+# * REPLACE_WITH_DEFAULT_OWNER
+# /.github/workflows/ REPLACE_WITH_CI_OWNER
+# /.github/dependabot.yml REPLACE_WITH_DEPENDENCY_OWNER
+# /.github/CODEOWNERS REPLACE_WITH_REPO_ADMIN
+# /package.json REPLACE_WITH_DEPENDENCY_OWNER
+# /package-lock.json REPLACE_WITH_DEPENDENCY_OWNER
