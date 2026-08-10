@@ -1,31 +1,23 @@
 # CODEOWNERS - map paths to GitHub users or teams that must review changes.
 #
-# STATUS: PLACEHOLDER - no real GitHub usernames or teams have been
-# confirmed for this repository, so ownership below is NOT yet active.
-# Replace every "REPLACE_WITH_..." placeholder with a real @username or
-# @IFI-Techsolutions-Limited/team-name, then remove the leading "#" to
-# uncomment the rule. Until that is done:
-#   - Branch protection's "Require review from Code Owners" cannot be
-#     safely enabled (it would make main unmergeable).
-#   - Reviews are not currently enforced by path.
+# Ownership below reflects the repository's actual collaborators. This
+# repository currently has two direct collaborators (both with admin role)
+# and the organization has no teams, so @rachita2901 is set as the owner
+# for the paths below per explicit confirmation. Revisit this file if
+# repository ownership changes or a dedicated review team is created.
 #
-# Minimum coverage required by repository governance policy:
+# Coverage required by repository governance policy:
 #   *                         -> default owner(s) for everything
 #   .github/workflows/       -> CI/CD pipeline owner(s)
 #   .github/dependabot.yml   -> dependency policy owner(s)
 #   .github/CODEOWNERS       -> this file's own owner(s) (meta-ownership)
 #   package.json             -> dependency/runtime owner(s)
 #   package-lock.json        -> dependency/runtime owner(s)
-#
-# Example syntax once real owners are known:
-#   * @your-github-username
-#   /controllers/ @IFI-Techsolutions-Limited/luv-films-admins
-#   /config/ @IFI-Techsolutions-Limited/luv-films-admins
-#   /.github/ @IFI-Techsolutions-Limited/luv-films-admins
 
-# * REPLACE_WITH_DEFAULT_OWNER
-# /.github/workflows/ REPLACE_WITH_CI_OWNER
-# /.github/dependabot.yml REPLACE_WITH_DEPENDENCY_OWNER
-# /.github/CODEOWNERS REPLACE_WITH_REPO_ADMIN
-# /package.json REPLACE_WITH_DEPENDENCY_OWNER
-# /package-lock.json REPLACE_WITH_DEPENDENCY_OWNER
+* @rachita2901
+/.github/ @rachita2901
+/.github/workflows/ @rachita2901
+/.github/dependabot.yml @rachita2901
+/.github/CODEOWNERS @rachita2901
+/package.json @rachita2901
+/package-lock.json @rachita2901
