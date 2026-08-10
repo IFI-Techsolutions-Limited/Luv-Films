@@ -3,17 +3,19 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - master
       - main
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }} # set as a repo variable, or hardcode below
-  NODE_VERSION: "18.x"
+  NODE_VERSION: "22.x"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,9 +25,19 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Verify Node and lockfile
+        run: |
+          node --version
+          npm --version
+          ls -la package-lock.json
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate application syntax
+        run: node --check server.js
 
       - name: Package app for deployment
         run: |
@@ -35,7 +47,10 @@ jobs:
             --exclude='.github' \
             --exclude='node_modules' \
             --exclude='staging' \
+            --exclude='.env' \
+            --exclude='coverage' \
             ./ staging/
+
           cd staging
           npm ci --omit=dev
           zip -r ../release.zip .
@@ -45,13 +60,18 @@ jobs:
         with:
           name: node-app
           path: release.zip
+          retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     environment:
-      name: production
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      name: development
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Download artifact
@@ -59,10 +79,16 @@ jobs:
         with:
           name: node-app
 
+      - name: Azure Login using OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           package: release.zip
