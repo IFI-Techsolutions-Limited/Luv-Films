@@ -1,0 +1,46 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "22.x"
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Verify Node and lockfile
+        run: |
+          node --version
+          npm --version
+          ls -la package-lock.json
+
+      - name: Install dependencies (deterministic)
+        run: npm ci
+
+      - name: Validate application syntax
+        run: node --check server.js
+
+      # NOTE: package.json currently defines a placeholder test script
+      # ("Error: no test specified"). PR Validation intentionally does
+      # not invoke `npm test` against a placeholder, since that would
+      # create a permanently red, meaningless check. Add a real test
+      # step here once genuine automated tests exist.
