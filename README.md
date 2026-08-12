@@ -1,97 +1,43 @@
-# NodeJS Authentication App
-> A complete authentication app with login, logout, register, forget password, email verification(for added security), and access control. Can be used as starter for other Node.JS applications. using Node.js, Express, Passport, JWT, Mongoose, and more. 
+# Luv Films Production Application
 
-## Web App Link
-http://serene-headland-22338.herokuapp.com/
+This repository contains the production-ready Luv Films application code and DevOps configuration. The application is delivered using GitHub-based source control, GitHub Actions CI/CD, DevSecOps controls, and Azure App Service deployment.
 
-![Screenshot (4)](https://user-images.githubusercontent.com/49118089/90341145-b776a900-e01a-11ea-93c8-4f6864a141c1.png)
+## Production Scope
 
-## Technologies Used
-1.  NodeJS
-2.  Express
-3.  EJS
-4.  MongoDB
-5.  Mongoose
-6.  PassportJS
-7.  JWT
-8.  Nodemailer
+The production repository supports the Luv Films business-critical application hosted on Azure App Service. The solution follows a controlled software delivery model with protected branches, pull request reviews, automated validation, security scanning, deployment approvals, and post-deployment monitoring.
 
+## Technology Stack
 
-## Prerequisites
-- Git
-- NodeJS
-- CLI
+- Node.js / React application
+- GitHub for source control
+- GitHub Actions for CI/CD
+- Azure App Service for hosting
+- Azure Monitor and Application Insights for monitoring
+- GitHub Copilot for developer assistance
+- GitHub security controls including CodeQL, Dependabot, Secret Scanning, and Push Protection
 
-## GitHub Copilot (developer assistant)
+## Branching Strategy
 
-Per the Luv Films HLD, **GitHub Copilot** is an AI coding assistant used during development — it is **not** a runtime feature of the Node app.
+| Branch | Purpose |
+|---|---|
+| `main` | Production release branch |
+| `develop` | Development integration branch |
+| `feature/*` | Feature development branches |
 
-### Enable for the team
-1. Assign **GitHub Copilot** seats to developers in the org: [GitHub Copilot settings](https://github.com/settings/copilot)
-2. For org/repo policy: Organization → **Copilot** → enable for `IFI-Techsolutions-Limited/Luv-Films`
-3. In VS Code / Visual Studio / JetBrains, install the **GitHub Copilot** and **GitHub Copilot Chat** extensions and sign in with GitHub
+Direct commits to protected branches are not allowed. All changes must go through pull requests and required approvals.
 
-### Repo configuration (already in this project)
-| File | Purpose |
-|------|---------|
-| `.github/copilot-instructions.md` | Project context Copilot uses for suggestions |
-| `.github/CODEOWNERS` | Review ownership (HLD: CODEOWNERS / PR reviews) |
-| `.vscode/extensions.json` | Recommends Copilot extensions in the IDE |
+## CI/CD Process
 
-### Typical flow (matches HLD)
-`Developer` → assisted by `GitHub Copilot` → push/PR to `GitHub` → `GitHub Actions` → Azure App Service (Dev/Prod)
+The production delivery process follows this flow:
 
-## Installation
-
-##### Clone the latest Repository
-
-`git clone https://github.com/rahulsups/nodejs-auth.git`
-
-##### Into the project directory
-
-`cd nodejs-auth`
-
-##### Installing NPM dependencies
-
-`npm install`
-
-##### Then simply start your app
-
-`npm start`
-
-#### The Server should now be running at http://localhost:3006/
-
-## Folder Structure
-
-nodejs-auth <br>
-├── assets <br>
-│ --- ├── secure-icon.png <br>
-│ --- ├── cyber-security-icon.jpg <br>
-│ --- └── css <br>
-│ -------- └── bootstrap.min.css <br>
-├── config <br>
-│ --- ├── checkAuth.js <br>
-│ --- ├── key.js <br>
-│ --- └── passport.js <br>
-├── config <br>
-│ --- └──authController.js
-├── models <br>
-│ --- └── User.js <br>
-├── node_modules <br>
-├── routes <br>
-│ --- ├── auth.js <br>
-│ --- └── index.js <br>
-├── views <br>
-│ --- ├── dash.ejs <br>
-│ --- ├── forgot.ejs <br>
-│ --- ├── layout.ejs <br>
-│ --- ├── login.ejs <br>
-│ --- ├── messages.ejs <br>
-│ --- ├── register.ejs <br>
-│ --- ├── reset.ejs <br>
-│ --- └── welcome.ejs <br>
-├── .gitignore <br>
-├── package.json <br>
-├── package-lock.json <br>
-├── README.md <br>
-└── server.js <br>
+```text
+Feature Branch
+→ Pull Request
+→ Build Validation
+→ Unit / Smoke Tests
+→ Security Scanning
+→ CODEOWNERS Review
+→ Merge to main
+→ Production Approval
+→ Azure App Service Deployment
+→ Post-Deployment Health Check
