@@ -1,5 +1,4 @@
-
- Luv Films — GitHub Copilot instructions
+# Luv Films — GitHub Copilot instructions
 
 You are assisting developers on the **Luv Films** Node.js authentication web app.
 
