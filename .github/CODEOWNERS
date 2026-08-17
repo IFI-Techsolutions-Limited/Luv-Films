@@ -1,10 +1,9 @@
 # CODEOWNERS - map paths to GitHub users or teams that must review changes.
 #
-# Ownership below reflects the repository's actual collaborators. This
-# repository currently has two direct collaborators (both with admin role)
-# and the organization has no teams, so @rachita2901 is set as the owner
-# for the paths below per explicit confirmation. Revisit this file if
-# repository ownership changes or a dedicated review team is created.
+# Replace placeholders below with real @users or @org/team from your GitHub org.
+# Keep ownership rules commented out until valid owners are available,
+# otherwise enabling "Require review from Code Owners" can block merges.
+# Revisit this file whenever repository ownership changes or a review team is created.
 #
 # Coverage required by repository governance policy:
 #   *                         -> default owner(s) for everything
