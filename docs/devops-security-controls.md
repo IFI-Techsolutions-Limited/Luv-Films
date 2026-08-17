@@ -39,7 +39,7 @@ Each control is labeled one of: **IMPLEMENTED**, **MANUAL** (requires a human to
 CodeQL and Dependency Review are intentionally **not** configured as required status checks yet, per governance policy (only PR Validation is required at this stage; CodeQL/Dependency Review can be promoted to required checks after a longer stability track record).
 
 ## 9. CODEOWNERS
-**IMPLEMENTED.** `.github/CODEOWNERS` now designates `@rachita2901` (the repository's active admin collaborator — confirmed via explicit user direction, since the repository has exactly 2 direct collaborators, both admins, and the organization has 0 teams, so no single owner could be inferred automatically) as owner for: `*`, `.github/`, `.github/workflows/`, `.github/dependabot.yml`, `.github/CODEOWNERS`, `package.json`, `package-lock.json`. Validated via GitHub's own "This CODEOWNERS file is valid" banner. "Require review from Code Owners" is enabled in branch protection (Section 8).
+**MANUAL.** `.github/CODEOWNERS` documents the required ownership paths, but repository admins must replace placeholders with real GitHub usernames/teams before enabling "Require review from Code Owners".
 
 ## 10. Pull request reviews
 **IMPLEMENTED.** Verified live against open PR #3: PR is required before merge, at least 1 approval is required, conversation resolution is required, the `Validate` status check is required, and Code Owners review is required — all shown as active/blocking "Required" conditions on the PR's merge box, without merging the PR.
