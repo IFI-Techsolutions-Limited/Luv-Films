@@ -4,6 +4,109 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "22.x"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Verify Node and lockfile
+        run: |
+          node --version
+          npm --version
+          ls -la package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Validate application syntax
+        run: node --check server.js
+
+      - name: Package app for deployment
+        run: |
+          mkdir -p staging
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='staging' \
+            --exclude='.env' \
+            --exclude='coverage' \
+            ./ staging/
+
+          cd staging
+          npm ci --omit=dev
+          zip -r ../release.zip .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-app
+          path: release.zip
+          retention-days: 1
+
+  deploy:
+    needs: build
+    # Pull request runs stop after build + lint; only main deploys.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: development
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: node-app
+
+      - name: Azure Login using OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          package: release.zip
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 env:
