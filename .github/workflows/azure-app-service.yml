@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+      - develop
   workflow_dispatch:
 
 env:
@@ -36,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint (ESLint)
+        run: npm run lint
+
       - name: Validate application syntax
         run: node --check server.js
 
@@ -64,6 +71,8 @@ jobs:
 
   deploy:
     needs: build
+    # Pull request runs stop after build + lint; only main deploys.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     environment:
