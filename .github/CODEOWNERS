@@ -1,10 +1,22 @@
-# CODEOWNERS — map paths to GitHub users or teams that must review changes.
-# Replace the placeholders with real @users or @org/team from your GitHub org.
-# Uncomment lines after the team/users exist, or branch protection with
-# "Require review from Code Owners" will fail.
+# CODEOWNERS - map paths to GitHub users or teams that must review changes.
 #
-# Examples:
-# *                         @your-github-username
-# /controllers/             @IFI-Techsolutions-Limited/luv-films-admins
-# /config/                  @IFI-Techsolutions-Limited/luv-films-admins
-# /.github/                 @IFI-Techsolutions-Limited/luv-films-admins
+# Replace placeholders below with real @users or @org/team from your GitHub org.
+# Keep ownership rules commented out until valid owners are available,
+# otherwise enabling "Require review from Code Owners" can block merges.
+# Revisit this file whenever repository ownership changes or a review team is created.
+#
+# Coverage required by repository governance policy:
+#   *                         -> default owner(s) for everything
+#   .github/workflows/       -> CI/CD pipeline owner(s)
+#   .github/dependabot.yml   -> dependency policy owner(s)
+#   .github/CODEOWNERS       -> this file's own owner(s) (meta-ownership)
+#   package.json             -> dependency/runtime owner(s)
+#   package-lock.json        -> dependency/runtime owner(s)
+
+* @rachita2901
+/.github/ @rachita2901
+/.github/workflows/ @rachita2901
+/.github/dependabot.yml @rachita2901
+/.github/CODEOWNERS @rachita2901
+/package.json @rachita2901
+/package-lock.json @rachita2901
